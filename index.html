@@ -4,63 +4,71 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Little Easier</title>
-<meta name="description" content="Little Easier makes calm, simple apps for neurodivergent children and their families.">
+<meta name="description" content="Calm, simple tools for children and the people who look after them. No ads, no pressure, and no WiFi needed.">
 <meta name="theme-color" content="#F4F1EA">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800&display=swap">
 <style>
+/* One family: beige ground, rounded Nunito everywhere, each app owns one colour and one illustrated icon. */
 :root {
   --ground: #F4F1EA;
   --card: #FFFFFF;
   --ink: #2E3A3A;
   --soft: #5C6666;
-  --sage: #4F7D75;
-  --night: #0F1528;
+  --line: #E6E0D4;
+  --calm: #4F7D75;
+  --plan: #B08A4E;
+  --maths: #6C6AA8;
+  --english: #A94E6B;
+  --routines: #C07A55;
+  --choices: #4A86B0;
   --font: 'Nunito', ui-rounded, 'SF Pro Rounded', system-ui, sans-serif;
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; }
-body {
-  background: var(--ground);
-  color: var(--ink);
-  font-family: var(--font);
-  line-height: 1.5;
-}
+body { background: var(--ground); color: var(--ink); font-family: var(--font); line-height: 1.5; }
 main {
-  max-width: 640px;
+  max-width: 680px;
   margin: 0 auto;
   padding-block: calc(env(safe-area-inset-top, 0px) + 56px) calc(env(safe-area-inset-bottom, 0px) + 48px);
   padding-left: max(20px, env(safe-area-inset-left, 0px));
   padding-right: max(20px, env(safe-area-inset-right, 0px));
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 32px;
 }
-.mark { font-size: 40px; font-weight: 800; line-height: 1; letter-spacing: -0.5px; }
-.dots { display: flex; gap: 7px; margin-top: 10px; }
+.mark { font-size: 42px; font-weight: 800; line-height: 1; letter-spacing: -0.5px; }
+.dots { display: flex; gap: 7px; margin-top: 12px; }
 .dots span { width: 9px; height: 9px; border-radius: 50%; }
-h1 { margin: 0; font-size: 26px; font-weight: 800; line-height: 1.2; text-wrap: balance; }
-p { margin: 0; color: var(--soft); font-size: 17px; font-weight: 600; max-width: 34em; }
-.apps { display: flex; flex-direction: column; gap: 12px; }
+.intro { display: flex; flex-direction: column; gap: 10px; }
+h1 { margin: 0; font-size: 27px; font-weight: 800; line-height: 1.2; text-wrap: balance; }
+.intro p { margin: 0; color: var(--soft); font-size: 17px; font-weight: 600; max-width: 34em; }
+h2 { margin: 0 0 -16px; font-size: 13px; font-weight: 800; color: var(--soft); letter-spacing: 0.6px; text-transform: uppercase; }
+.apps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 520px) { .apps { grid-template-columns: minmax(0, 1fr); } }
 .app {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   padding: 14px;
   border-radius: 24px;
   background: var(--card);
   color: var(--ink);
   text-decoration: none;
+  border: 2px solid transparent;
 }
-.app img, .app .ph { width: 64px; height: 64px; border-radius: 16px; flex: none; }
-.app .ph { display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; color: #FFFFFF; }
+.app img { width: 64px; height: 64px; border-radius: 15px; flex: none; }
 .app div { display: flex; flex-direction: column; min-width: 0; }
 .app small { font-size: 12px; font-weight: 700; color: var(--soft); }
-.app b { font-size: 20px; font-weight: 800; line-height: 1.2; }
-.app em { font-style: normal; font-size: 14px; font-weight: 600; color: var(--soft); }
-.app.soon { opacity: 0.7; }
-a.app:hover { outline: 2px solid var(--sage); }
-a.app:focus-visible { outline: 3px solid var(--sage); outline-offset: 2px; }
+.app b { font-size: 20px; font-weight: 800; line-height: 1.15; }
+.app em { font-style: normal; font-size: 14px; font-weight: 600; color: var(--soft); line-height: 1.35; }
+.app .tag { align-self: flex-start; margin-top: 4px; padding: 1px 8px; border-radius: 10px; font-size: 12px; font-weight: 800; }
+.app .live { background: #E3EFEC; color: #2F5F57; }
+.app .soon { background: #EEEAE1; color: var(--soft); }
+.app.featured { grid-column: 1 / -1; }
+a.app:hover { border-color: var(--calm); }
+a.app:focus-visible { outline: 3px solid var(--calm); outline-offset: 2px; }
 footer { font-size: 13px; color: var(--soft); font-weight: 600; }
 </style>
 </head>
@@ -69,27 +77,45 @@ footer { font-size: 13px; color: var(--soft); font-weight: 600; }
   <div>
     <div class="mark">little easier.</div>
     <div class="dots" aria-hidden="true">
-      <span style="background:#4F7D75"></span><span style="background:#C9A66B"></span><span style="background:#6C6AA8"></span><span style="background:#B0705A"></span>
+      <span style="background: var(--calm)"></span>
+      <span style="background: var(--plan)"></span>
+      <span style="background: var(--maths)"></span>
+      <span style="background: var(--english)"></span>
+      <span style="background: var(--routines)"></span>
+      <span style="background: var(--choices)"></span>
     </div>
   </div>
 
-  <div style="display:flex;flex-direction:column;gap:10px">
+  <div class="intro">
     <h1>Small apps that make life a little easier.</h1>
-    <p>Calm, simple tools for neurodivergent children and the people who look after them. No ads, no pressure, nothing flashing.</p>
+    <p>Calm, simple tools for children and the people who look after them. No ads, no pressure, and no WiFi needed.</p>
   </div>
 
+  <h2>Apps</h2>
   <div class="apps">
     <a class="app" href="/calm/">
-      <img src="calm-icon.png" alt="">
-      <div><small>little easier</small><b>Calm</b><em>Sensory play: blow, push and pop bubbles</em></div>
+      <img src="icon-calm.png" alt="">
+      <div><small>little easier</small><b>Calm</b><em>Sensory play. Blow bubbles as big as you dare, push them together, pop them.</em><span class="tag live">Play now</span></div>
     </a>
-    <div class="app soon">
-      <span class="ph" style="background:#C9A66B" aria-hidden="true">Plan</span>
-      <div><small>little easier</small><b>Plan</b><em>Coming soon</em></div>
+    <div class="app">
+      <img src="icon-plan.png" alt="">
+      <div><small>little easier</small><b>Plan</b><em>Keeps your EHCP journey organised, with deadlines and what comes next.</em><span class="tag soon">Coming soon</span></div>
     </div>
-    <div class="app soon">
-      <span class="ph" style="background:#6C6AA8" aria-hidden="true">Maths</span>
-      <div><small>little easier</small><b>Maths</b><em>Coming soon</em></div>
+    <div class="app">
+      <img src="icon-maths.png" alt="">
+      <div><small>little easier</small><b>Maths</b><em>Build, count and stack with blocks.</em><span class="tag soon">Coming soon</span></div>
+    </div>
+    <div class="app">
+      <img src="icon-english.png" alt="">
+      <div><small>little easier</small><b>English</b><em>Letters, sounds and words, one block at a time.</em><span class="tag soon">Coming soon</span></div>
+    </div>
+    <div class="app">
+      <img src="icon-routines.png" alt="">
+      <div><small>little easier</small><b>Routines</b><em>Picture schedules for mornings and bedtimes.</em><span class="tag soon">Coming soon</span></div>
+    </div>
+    <div class="app">
+      <img src="icon-choices.png" alt="">
+      <div><small>little easier</small><b>Choices</b><em>Pick where to go and what to do from a few pictures.</em><span class="tag soon">Coming soon</span></div>
     </div>
   </div>
 
