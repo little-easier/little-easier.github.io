@@ -38,6 +38,9 @@ details { background: var(--card); border-radius: 18px; padding: 14px 18px; }
 details + details { margin-top: 10px; }
 summary { font-weight: 800; cursor: pointer; }
 details p { margin: 10px 0 2px; }
+.preview { width: 100%; border-radius: 20px; display: block; background: #1F6E8C; aspect-ratio: 4 / 3; }
+.shots { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; -webkit-overflow-scrolling: touch; }
+.shots img { flex: none; width: 86%; max-width: 560px; aspect-ratio: 4 / 3; border-radius: 18px; scroll-snap-align: start; }
 footer { font-size: 13px; color: var(--soft); font-weight: 600; border-top: 2px solid var(--line); padding-top: 16px; }
 footer a { color: var(--soft); }
 </style>
@@ -49,6 +52,26 @@ footer a { color: var(--soft); }
   <p class="lead">Draw a fish. Watch it swim.</p>
   <p style="margin:0">Children draw anything they like, peel it off the page and drop it into their own pop-up aquarium, where it comes alive as a paper creature. They feed it, care for it and watch it grow, make friends and fall asleep at night.</p>
   <span class="store soon">Coming soon to the App Store · iPad and iPhone</span>
+
+  <video class="preview" src="img/preview.mp4" poster="img/preview-poster.jpg" autoplay muted loop playsinline preload="metadata"
+         aria-label="A short film: colouring a fish, peeling it off the page and dropping it into the aquarium, feeding time and a lighthouse decoration"></video>
+
+  <section aria-label="Screenshots">
+    <h2>Take a look</h2>
+    <div class="shots">
+      <img src="img/01-tank.jpg" alt="Draw a fish. Watch it swim. The pop-up paper aquarium." loading="lazy">
+      <img src="img/02-draw-peel.jpg" alt="Draw anything. Peel it off. Drop it in." loading="lazy">
+      <img src="img/03-ways-to-draw.jpg" alt="Colour in, trace or join the dots, with stickers and step-by-step help." loading="lazy">
+      <img src="img/04-photo.jpg" alt="Bring paper drawings to life: a drawing on paper, cut out for you." loading="lazy">
+      <img src="img/05-feed-stroke.jpg" alt="Feed them, stroke them, watch them grow." loading="lazy">
+      <img src="img/06-clean-card.jpg" alt="Keep the tank clean, and each creature's own card." loading="lazy">
+      <img src="img/07-decorate.jpg" alt="Castles, chests and lighthouses for the sand." loading="lazy">
+      <img src="img/08-send.jpg" alt="Made for every child: calm mode, gentle timers, nothing is ever lost." loading="lazy">
+      <img src="img/09-film.jpg" alt="Watch every drawing being drawn again." loading="lazy">
+      <img src="img/10-worlds.jpg" alt="Five pop-up worlds, real day and night." loading="lazy">
+    </div>
+    <p class="soft" style="margin:8px 0 0;font-size:13px">Swipe for more ›</p>
+  </section>
 
   <div class="card promise">
     <h2>Free, and private</h2>
