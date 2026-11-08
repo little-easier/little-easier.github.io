@@ -172,16 +172,16 @@ footer { font-size: 13px; color: var(--soft); font-weight: 600; }
   <footer>© 2026 Little Easier · <a href="/about/" style="color:inherit">About us</a> · <a href="mailto:hello@littleeasier.co.uk" style="color:inherit">hello@littleeasier.co.uk</a></footer>
 </main>
 <script>
-// App Store buttons: "On the App Store 28 November" until release day, then a real download link
+// App Store buttons: "Pre-order" (with an App Store id) or "On the App Store <date>" until release day, then "Download"
 (function () {
   var today = new Date(); today.setHours(0, 0, 0, 0);
   document.querySelectorAll('a.store').forEach(function (a) {
     var d = new Date(a.dataset.date + 'T00:00:00'), id = a.dataset.id;
-    if (id && today >= d) {
-      a.href = 'https://apps.apple.com/gb/app/id' + id;
-      a.textContent = 'Download on the App Store';
-      a.setAttribute('aria-label', 'Download ' + a.closest('.app').querySelector('b').textContent + ' on the App Store');
-    }
+    if (!id) return; // no App Store page yet: keep "On the App Store <date>"
+    var live = today >= d, name = a.closest('.app').querySelector('b').textContent;
+    a.href = 'https://apps.apple.com/gb/app/id' + id;
+    a.textContent = live ? 'Download on the App Store' : 'Pre-order on the App Store';
+    a.setAttribute('aria-label', (live ? 'Download ' : 'Pre-order ') + name + ' on the App Store');
   });
 })();
 </script>
