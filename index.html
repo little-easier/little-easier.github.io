@@ -67,17 +67,17 @@ h2 { margin: 0 0 -16px; font-size: 13px; font-weight: 800; color: var(--soft); l
 .app .live { background: #E3EFEC; color: #2F5F57; }
 .app .soon { background: #EEEAE1; color: var(--soft); }
 .app.featured { grid-column: 1 / -1; }
-a.app:hover, .app:has(a.open):hover { border-color: var(--calm); }
-.app:has(a.open) { position: relative; }
-.app a.open { color: inherit; text-decoration: none; }
-.app a.open::after { content: ""; position: absolute; inset: 0; border-radius: 24px; } /* the whole card opens the app on the web */
-.app a.open:focus-visible { outline: none; }
-.app:has(a.open:focus-visible) { outline: 3px solid var(--calm); outline-offset: 2px; }
-.app .row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; align-items: center; }
-.app .row .tag { margin-top: 0; }
-.store { position: relative; z-index: 1; padding: 1px 9px; border-radius: 10px; font-size: 12px; font-weight: 800; background: #EEEAE1; color: var(--soft); text-decoration: none; }
-a.store[href] { background: #1F2328; color: #FFFFFF; }
+a.app:hover { border-color: var(--calm); }
+.app .row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; align-items: center; }
+.store, .web { display: inline-flex; align-items: center; gap: 7px; min-height: 40px; padding: 0 14px; border-radius: 12px; font-size: 14px; font-weight: 800; text-decoration: none; line-height: 1; }
+.store:not([href]) { background: none; padding: 0 4px; min-height: 0; font-size: 13px; color: var(--soft); } /* just a date until there is a store page */
+.store:not([href])::before { content: "📅"; font-size: 13px; }
+.store svg { width: 15px; height: 15px; flex: none; fill: currentColor; margin-top: -2px; }
+a.store[href] { background: #111418; color: #FFFFFF; box-shadow: 0 2px 6px rgba(0,0,0,.18); }
 a.store[href]:hover { background: #000000; }
+.web { background: transparent; color: #2F5F57; box-shadow: inset 0 0 0 2px #CFE3DD; }
+.web:hover { box-shadow: inset 0 0 0 2px #2F5F57; }
+.store:focus-visible, .web:focus-visible { outline: 3px solid var(--calm); outline-offset: 2px; }
 a.app:focus-visible { outline: 3px solid var(--calm); outline-offset: 2px; }
 footer { font-size: 13px; color: var(--soft); font-weight: 600; }
 </style>
@@ -105,13 +105,17 @@ footer { font-size: 13px; color: var(--soft); font-weight: 600; }
   <div class="apps">
     <div class="app">
       <img src="icon-calm.png" alt="">
-      <div><small>little easier</small><a class="open" href="/calm/"><b>Calm Spaces</b></a><em>Gentle sensory play: blow bubbles, swirl glowing ink, wander a moonlit glade and feed the koi.</em>
-        <span class="row"><span class="tag live">Use now on the web</span><a class="store" data-date="2026-11-26" data-label="26 November">On the App Store 26 November</a></span></div>
+      <div><small>little easier</small><b>Calm Spaces</b><em>Gentle sensory play: blow bubbles, swirl glowing ink, wander a moonlit glade and feed the koi.</em>
+        <span class="row">
+          <a class="store" data-date="2026-11-26" data-label="26 November">Coming to the App Store 26 November</a>
+          <a class="web" href="/calm/">Try it free on the web</a></span></div>
     </div>
     <div class="app">
       <img src="icon-timer.png" alt="">
-      <div><small>little easier</small><a class="open" href="/timer/"><b>Calm Timer</b></a><em>Visual timers that make waiting and changing activities easier: a rocket, a dinosaur, a classic clock and more.</em>
-        <span class="row"><span class="tag live">Use now on the web</span><a class="store" data-date="2026-11-28" data-id="6829345623" data-label="28 November">On the App Store 28 November</a></span></div>
+      <div><small>little easier</small><b>Calm Timer</b><em>Visual timers that make waiting and changing activities easier: a rocket, a dinosaur, a classic clock and more.</em>
+        <span class="row">
+          <a class="store" data-date="2026-11-28" data-id="6829345623" data-label="28 November">On the App Store 28 November</a>
+          <a class="web" href="/timer/">Try it free on the web</a></span></div>
     </div>
     <a class="app" href="/maths/">
       <img src="icon-maths.png" alt="">
@@ -119,13 +123,17 @@ footer { font-size: 13px; color: var(--soft); font-weight: 600; }
     </a>
     <div class="app">
       <img src="icon-feelings.png" alt="">
-      <div><small>little easier</small><a class="open" href="/feelings/"><b>Feelings Friend</b></a><em>Helping kids say how they feel: build a face for a stitched friend, find the feeling and what helps.</em>
-        <span class="row"><span class="tag live">Use now on the web</span><a class="store" data-date="2026-11-30" data-id="6829346026" data-label="30 November">On the App Store 30 November</a></span></div>
+      <div><small>little easier</small><b>Feelings Friend</b><em>Helping kids say how they feel: build a face for a stitched friend, find the feeling and what helps.</em>
+        <span class="row">
+          <a class="store" data-date="2026-11-30" data-id="6829346026" data-label="30 November">On the App Store 30 November</a>
+          <a class="web" href="/feelings/">Try it free on the web</a></span></div>
     </div>
     <div class="app">
       <img src="icon-doodle-deep.png" alt="">
-      <div><small>little easier</small><a class="open" href="/doodle-deep/"><b>Doodle Deep</b></a><em>Draw a creature, peel it off the page and watch it come alive in your own pop-up aquarium.</em>
-        <span class="row"><a class="store" data-date="2026-11-24" data-label="24 November">On the App Store 24 November</a></span></div>
+      <div><small>little easier</small><b>Doodle Deep</b><em>Draw a creature, peel it off the page and watch it come alive in your own pop-up aquarium.</em>
+        <span class="row">
+          <a class="store" data-date="2026-11-24" data-label="24 November">Coming to the App Store 24 November</a>
+          <a class="web" href="/doodle-deep/">More about Doodle Deep</a></span></div>
     </div>
     <div class="app">
       <img src="icon-plan.png" alt="">
@@ -180,7 +188,7 @@ footer { font-size: 13px; color: var(--soft); font-weight: 600; }
     if (!id) return; // no App Store page yet: keep "On the App Store <date>"
     var live = today >= d, name = a.closest('.app').querySelector('b').textContent;
     a.href = 'https://apps.apple.com/gb/app/id' + id;
-    a.textContent = live ? 'Download on the App Store' : 'Pre-order on the App Store';
+    a.innerHTML = '<svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>' + (live ? 'Download on the App Store' : 'Pre-order on the App Store');
     a.setAttribute('aria-label', (live ? 'Download ' : 'Pre-order ') + name + ' on the App Store');
   });
 })();
