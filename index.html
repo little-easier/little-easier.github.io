@@ -67,7 +67,17 @@ h2 { margin: 0 0 -16px; font-size: 13px; font-weight: 800; color: var(--soft); l
 .app .live { background: #E3EFEC; color: #2F5F57; }
 .app .soon { background: #EEEAE1; color: var(--soft); }
 .app.featured { grid-column: 1 / -1; }
-a.app:hover { border-color: var(--calm); }
+a.app:hover, .app:has(a.open):hover { border-color: var(--calm); }
+.app:has(a.open) { position: relative; }
+.app a.open { color: inherit; text-decoration: none; }
+.app a.open::after { content: ""; position: absolute; inset: 0; border-radius: 24px; } /* the whole card opens the app on the web */
+.app a.open:focus-visible { outline: none; }
+.app:has(a.open:focus-visible) { outline: 3px solid var(--calm); outline-offset: 2px; }
+.app .row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; align-items: center; }
+.app .row .tag { margin-top: 0; }
+.store { position: relative; z-index: 1; padding: 1px 9px; border-radius: 10px; font-size: 12px; font-weight: 800; background: #EEEAE1; color: var(--soft); text-decoration: none; }
+a.store[href] { background: #1F2328; color: #FFFFFF; }
+a.store[href]:hover { background: #000000; }
 a.app:focus-visible { outline: 3px solid var(--calm); outline-offset: 2px; }
 footer { font-size: 13px; color: var(--soft); font-weight: 600; }
 </style>
@@ -93,26 +103,30 @@ footer { font-size: 13px; color: var(--soft); font-weight: 600; }
 
   <h2>Apps</h2>
   <div class="apps">
-    <a class="app" href="/calm/">
+    <div class="app">
       <img src="icon-calm.png" alt="">
-      <div><small>little easier</small><b>Calm Spaces</b><em>Gentle sensory play: blow bubbles, swirl glowing ink, wander a moonlit glade and feed the koi.</em><span class="tag live">Use now</span></div>
-    </a>
-    <a class="app" href="/timer/">
+      <div><small>little easier</small><a class="open" href="/calm/"><b>Calm Spaces</b></a><em>Gentle sensory play: blow bubbles, swirl glowing ink, wander a moonlit glade and feed the koi.</em>
+        <span class="row"><span class="tag live">Use now on the web</span><a class="store" data-date="2026-11-26" data-label="26 November">On the App Store 26 November</a></span></div>
+    </div>
+    <div class="app">
       <img src="icon-timer.png" alt="">
-      <div><small>little easier</small><b>Timer</b><em>Visual countdowns that make waiting and changing activities easier. Sand, bubbles, sunset and more.</em><span class="tag live">Use now</span></div>
-    </a>
+      <div><small>little easier</small><a class="open" href="/timer/"><b>Calm Timer</b></a><em>Visual timers that make waiting and changing activities easier: a rocket, a dinosaur, a classic clock and more.</em>
+        <span class="row"><span class="tag live">Use now on the web</span><a class="store" data-date="2026-11-28" data-id="6829345623" data-label="28 November">On the App Store 28 November</a></span></div>
+    </div>
     <a class="app" href="/maths/">
       <img src="icon-maths.png" alt="">
       <div><small>little easier</small><b>Maths</b><em>Count, build and add up in a world of blocks, space, trains or dinosaurs.</em><span class="tag live">Use now</span></div>
     </a>
-    <a class="app" href="/feelings/">
+    <div class="app">
       <img src="icon-feelings.png" alt="">
-      <div><small>little easier</small><b>Feelings</b><em>Build a face for your stitched friend, find the feeling, and work out what helps.</em><span class="tag live">Use now</span></div>
-    </a>
-    <a class="app" href="/doodle-deep/">
+      <div><small>little easier</small><a class="open" href="/feelings/"><b>Feelings Friend</b></a><em>Helping kids say how they feel: build a face for a stitched friend, find the feeling and what helps.</em>
+        <span class="row"><span class="tag live">Use now on the web</span><a class="store" data-date="2026-11-30" data-id="6829346026" data-label="30 November">On the App Store 30 November</a></span></div>
+    </div>
+    <div class="app">
       <img src="icon-doodle-deep.png" alt="">
-      <div><small>little easier</small><b>Doodle Deep</b><em>Draw a creature, peel it off the page and watch it come alive in your own pop-up aquarium.</em><span class="tag soon">Coming soon to the App Store</span></div>
-    </a>
+      <div><small>little easier</small><a class="open" href="/doodle-deep/"><b>Doodle Deep</b></a><em>Draw a creature, peel it off the page and watch it come alive in your own pop-up aquarium.</em>
+        <span class="row"><a class="store" data-date="2026-11-24" data-label="24 November">On the App Store 24 November</a></span></div>
+    </div>
     <div class="app">
       <img src="icon-plan.png" alt="">
       <div><small>little easier</small><b>Plan</b><em>Keeps your EHCP journey organised, with deadlines and what comes next.</em><span class="tag soon">Coming soon</span></div>
@@ -157,5 +171,19 @@ footer { font-size: 13px; color: var(--soft); font-weight: 600; }
 
   <footer>© 2026 Little Easier · <a href="/about/" style="color:inherit">About us</a> · <a href="mailto:hello@littleeasier.co.uk" style="color:inherit">hello@littleeasier.co.uk</a></footer>
 </main>
+<script>
+// App Store buttons: "On the App Store 28 November" until release day, then a real download link
+(function () {
+  var today = new Date(); today.setHours(0, 0, 0, 0);
+  document.querySelectorAll('a.store').forEach(function (a) {
+    var d = new Date(a.dataset.date + 'T00:00:00'), id = a.dataset.id;
+    if (id && today >= d) {
+      a.href = 'https://apps.apple.com/gb/app/id' + id;
+      a.textContent = 'Download on the App Store';
+      a.setAttribute('aria-label', 'Download ' + a.closest('.app').querySelector('b').textContent + ' on the App Store');
+    }
+  });
+})();
+</script>
 </body>
 </html>
