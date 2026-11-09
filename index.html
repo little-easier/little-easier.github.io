@@ -45,7 +45,7 @@ main {
 h1 { margin: 0; font-size: 27px; font-weight: 800; line-height: 1.2; text-wrap: balance; }
 .intro p { margin: 0; color: var(--soft); font-size: 17px; font-weight: 600; max-width: 34em; }
 h2 { margin: 0 0 -16px; font-size: 13px; font-weight: 800; color: var(--soft); letter-spacing: 0.6px; text-transform: uppercase; }
-.apps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.apps { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; } /* one app per row, so the buttons always fit */
 @media (max-width: 520px) { .apps { grid-template-columns: minmax(0, 1fr); } }
 .app {
   display: flex;
@@ -58,7 +58,7 @@ h2 { margin: 0 0 -16px; font-size: 13px; font-weight: 800; color: var(--soft); l
   text-decoration: none;
   border: 2px solid transparent;
 }
-.app img { width: 64px; height: 64px; border-radius: 15px; flex: none; }
+.app img { width: 76px; height: 76px; border-radius: 15px; flex: none; }
 .app div { display: flex; flex-direction: column; min-width: 0; }
 .app small { font-size: 12px; font-weight: 700; color: var(--soft); }
 .app b { font-size: 20px; font-weight: 800; line-height: 1.15; }
@@ -69,8 +69,8 @@ h2 { margin: 0 0 -16px; font-size: 13px; font-weight: 800; color: var(--soft); l
 .app.featured { grid-column: 1 / -1; }
 a.app:hover { border-color: var(--calm); }
 .app .row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; align-items: center; }
-.store, .web { display: inline-flex; align-items: center; gap: 7px; min-height: 40px; padding: 0 14px; border-radius: 12px; font-size: 14px; font-weight: 800; text-decoration: none; line-height: 1; }
-.store:not([href]) { background: none; padding: 0 4px; min-height: 0; font-size: 13px; color: var(--soft); } /* just a date until there is a store page */
+.store, .web { white-space: nowrap; display: inline-flex; align-items: center; gap: 7px; min-height: 40px; padding: 0 14px; border-radius: 12px; font-size: 14px; font-weight: 800; text-decoration: none; line-height: 1; }
+.store:not([href]) { white-space: normal; background: none; padding: 0 4px; min-height: 0; font-size: 13px; color: var(--soft); } /* just a date until there is a store page */
 .store:not([href])::before { content: "📅"; font-size: 13px; }
 .store svg { width: 15px; height: 15px; flex: none; fill: currentColor; margin-top: -2px; }
 a.store[href] { background: #111418; color: #FFFFFF; box-shadow: 0 2px 6px rgba(0,0,0,.18); }
@@ -79,6 +79,14 @@ a.store[href]:hover { background: #000000; }
 .web:hover { box-shadow: inset 0 0 0 2px #2F5F57; }
 .store:focus-visible, .web:focus-visible { outline: 3px solid var(--calm); outline-offset: 2px; }
 a.app:focus-visible { outline: 3px solid var(--calm); outline-offset: 2px; }
+.nexts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 16px; }
+@media (max-width: 520px) { .nexts { grid-template-columns: minmax(0, 1fr); } }
+.next { display: flex; align-items: center; gap: 12px; padding: 8px 4px; opacity: .85; }
+.next img { width: 40px; height: 40px; border-radius: 10px; flex: none; }
+.next div { display: flex; flex-direction: column; min-width: 0; }
+.next b { font-size: 15px; font-weight: 800; }
+.next span { font-size: 13px; font-weight: 600; color: var(--soft); line-height: 1.3; }
+.app.featured img { width: 84px; height: 84px; border-radius: 20px; }
 footer { font-size: 13px; color: var(--soft); font-weight: 600; }
 </style>
 </head>
@@ -103,6 +111,13 @@ footer { font-size: 13px; color: var(--soft); font-weight: 600; }
 
   <h2>Apps</h2>
   <div class="apps">
+    <div class="app featured">
+      <img src="icon-doodle-deep.png" alt="">
+      <div><small>little easier</small><b>Doodle Deep</b><em>Draw a creature, peel it off the page and watch it come alive in your own pop-up aquarium.</em>
+        <span class="row">
+          <a class="store" data-date="2026-11-24" data-label="24 November">Coming to the App Store 24 November</a>
+          <a class="web" href="/doodle-deep/">More about Doodle Deep</a></span></div>
+    </div>
     <div class="app">
       <img src="icon-calm.png" alt="">
       <div><small>little easier</small><b>Calm Spaces</b><em>Gentle sensory play: blow bubbles, swirl glowing ink, wander a moonlit glade and feed the koi.</em>
@@ -117,10 +132,6 @@ footer { font-size: 13px; color: var(--soft); font-weight: 600; }
           <a class="store" data-date="2026-11-28" data-id="6829345623" data-label="28 November">On the App Store 28 November</a>
           <a class="web" href="/timer/">Try it free on the web</a></span></div>
     </div>
-    <a class="app" href="/maths/">
-      <img src="icon-maths.png" alt="">
-      <div><small>little easier</small><b>Maths</b><em>Count, build and add up in a world of blocks, space, trains or dinosaurs.</em><span class="tag live">Use now</span></div>
-    </a>
     <div class="app">
       <img src="icon-feelings.png" alt="">
       <div><small>little easier</small><b>Feelings Friend</b><em>Helping kids say how they feel: build a face for a stitched friend, find the feeling and what helps.</em>
@@ -129,52 +140,25 @@ footer { font-size: 13px; color: var(--soft); font-weight: 600; }
           <a class="web" href="/feelings/">Try it free on the web</a></span></div>
     </div>
     <div class="app">
-      <img src="icon-doodle-deep.png" alt="">
-      <div><small>little easier</small><b>Doodle Deep</b><em>Draw a creature, peel it off the page and watch it come alive in your own pop-up aquarium.</em>
+      <img src="icon-maths.png" alt="">
+      <div><small>little easier</small><b>Maths</b><em>Count, build and add up in a world of blocks, space, trains or dinosaurs.</em>
         <span class="row">
-          <a class="store" data-date="2026-11-24" data-label="24 November">Coming to the App Store 24 November</a>
-          <a class="web" href="/doodle-deep/">More about Doodle Deep</a></span></div>
+          <a class="web" href="/maths/">Try it free on the web</a></span></div>
     </div>
-    <div class="app">
-      <img src="icon-plan.png" alt="">
-      <div><small>little easier</small><b>Plan</b><em>Keeps your EHCP journey organised, with deadlines and what comes next.</em><span class="tag soon">Coming soon</span></div>
-    </div>
-    <div class="app">
-      <img src="icon-english.png" alt="">
-      <div><small>little easier</small><b>English</b><em>Letters, sounds and words, one block at a time.</em><span class="tag soon">Coming soon</span></div>
-    </div>
-    <div class="app">
-      <img src="icon-routines.png" alt="">
-      <div><small>little easier</small><b>Routines</b><em>Picture schedules for mornings and bedtimes.</em><span class="tag soon">Coming soon</span></div>
-    </div>
-    <div class="app">
-      <img src="icon-choices.png" alt="">
-      <div><small>little easier</small><b>Choices</b><em>Pick where to go and what to do from a few pictures.</em><span class="tag soon">Coming soon</span></div>
-    </div>
-    <div class="app">
-      <img src="icon-stories.png" alt="">
-      <div><small>little easier</small><b>Stories</b><em>Illustrated stories to get ready for new things.</em><span class="tag soon">Coming soon</span></div>
-    </div>
-    <div class="app">
-      <img src="icon-talk.png" alt="">
-      <div><small>little easier</small><b>Talk</b><em>Picture buttons for when words are hard.</em><span class="tag soon">Coming soon</span></div>
-    </div>
-    <div class="app">
-      <img src="icon-food.png" alt="">
-      <div><small>little easier</small><b>Food</b><em>Small, playful steps from foods they love to new ones.</em><span class="tag soon">Coming soon</span></div>
-    </div>
-    <div class="app">
-      <img src="icon-log.png" alt="">
-      <div><small>little easier</small><b>Log</b><em>Track sleep, meltdowns and good days in a few taps.</em><span class="tag soon">Coming soon</span></div>
-    </div>
-    <div class="app">
-      <img src="icon-focus.png" alt="">
-      <div><small>little easier</small><b>Focus</b><em>Break big tasks into tiny, doable steps.</em><span class="tag soon">Coming soon</span></div>
-    </div>
-    <div class="app">
-      <img src="icon-energy.png" alt="">
-      <div><small>little easier</small><b>Energy</b><em>Track what drains you and what fills you back up.</em><span class="tag soon">Coming soon</span></div>
-    </div>
+  </div>
+
+  <h2>What we're making next</h2>
+  <div class="nexts">
+    <div class="next"><img src="icon-plan.png" alt=""><div><b>Plan</b><span>Keeps your EHCP journey organised, with deadlines and what comes next.</span></div></div>
+    <div class="next"><img src="icon-english.png" alt=""><div><b>English</b><span>Letters, sounds and words, one block at a time.</span></div></div>
+    <div class="next"><img src="icon-routines.png" alt=""><div><b>Routines</b><span>Picture schedules for mornings and bedtimes.</span></div></div>
+    <div class="next"><img src="icon-choices.png" alt=""><div><b>Choices</b><span>Pick where to go and what to do from a few pictures.</span></div></div>
+    <div class="next"><img src="icon-stories.png" alt=""><div><b>Stories</b><span>Illustrated stories to get ready for new things.</span></div></div>
+    <div class="next"><img src="icon-talk.png" alt=""><div><b>Talk</b><span>Picture buttons for when words are hard.</span></div></div>
+    <div class="next"><img src="icon-food.png" alt=""><div><b>Food</b><span>Small, playful steps from foods they love to new ones.</span></div></div>
+    <div class="next"><img src="icon-log.png" alt=""><div><b>Log</b><span>Track sleep, meltdowns and good days in a few taps.</span></div></div>
+    <div class="next"><img src="icon-focus.png" alt=""><div><b>Focus</b><span>Break big tasks into tiny, doable steps.</span></div></div>
+    <div class="next"><img src="icon-energy.png" alt=""><div><b>Energy</b><span>Track what drains you and what fills you back up.</span></div></div>
   </div>
 
   <footer>© 2026 Little Easier · <a href="/about/" style="color:inherit">About us</a> · <a href="mailto:hello@littleeasier.co.uk" style="color:inherit">hello@littleeasier.co.uk</a></footer>
